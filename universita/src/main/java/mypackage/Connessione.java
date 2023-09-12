@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connessione {
-	
+//Classe Connessione	
 	private static Connection con;
 	
 	static 
