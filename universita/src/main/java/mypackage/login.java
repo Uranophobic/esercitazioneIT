@@ -62,9 +62,9 @@ public class login extends HttpServlet {
 					smt1.setString(1, username);  // abbiamo chiesto la stringa relativa all' username e password
 					ResultSet rs1 =smt1.executeQuery(); //restituisce la collection contenente la matricola
 					rs1.next(); // seleziono il record contenente la matricola 
-					String matricola=rs1.getString("matricola");// prendo la matricola e l'assegno a int matricola 
+					String matricola=rs1.getString("matricola"); // prendo la matricola e l'assegno a int matricola 
 					Statement smt2=conn.createStatement();
-					ResultSet rs2=smt2.executeQuery("select idcorso,materia,nome,cognome from corso join professore on cattedra=idprofessore");
+					ResultSet rs2=smt2.executeQuery("select idcorso,materia,nome,cognome from corso join professore on cattedra=idprofessore");					
 					session=request.getSession(true); //se la sessione esiste(esiste l'oggetto session) altrimenti ti crea un oggetto di tipo HttpSession
 					session.setAttribute("matricola", matricola);
 					RequestDispatcher rd= request.getRequestDispatcher("studente.jsp"); //con resultset abbiamo preso la tabella dei corsi disponibili
