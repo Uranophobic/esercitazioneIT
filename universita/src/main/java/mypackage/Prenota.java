@@ -45,8 +45,10 @@ public class Prenota extends HttpServlet {
 		HttpSession session= request.getSession();
 		String appello = request.getParameter("appello");
 		String matricola=(String) session.getAttribute("matricola");
-		Connection conn= Connessione.getCon();
+	
+		Connection conn=null; 	
 		try {
+			conn = Connessione.getInstance().getConnection();
 			PreparedStatement smt2 = conn.prepareStatement("insert into prenotazione (stud_prenotato,app_prenotato) values (CAST(? AS UNSIGNED INTEGER),CAST(? AS UNSIGNED INTEGER))");
 			smt2.setString(1, matricola);
 			smt2.setString(2,appello);
@@ -65,7 +67,7 @@ public class Prenota extends HttpServlet {
 			request.setAttribute("data", dataScelta);
 			request.setAttribute("materia2", nomeMateria);
 			rd1.forward(request, response);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
