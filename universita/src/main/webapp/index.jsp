@@ -30,7 +30,7 @@
 		<div class="form">
 			<form action="login" method="post">
 				<h2>Login</h2>
-				<h3>Email</h3>
+				<h3>Username</h3>
 				<input type="text" name="username" id="username">
 				<h3>Password</h3>
 				<input type="password" name="password" id="password">
