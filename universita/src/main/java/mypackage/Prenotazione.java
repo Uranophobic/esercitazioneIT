@@ -56,6 +56,7 @@ public class Prenotazione extends HttpServlet {
 			String nomeMateria=rs1.getString(1);
 			PreparedStatement smt= conn.prepareStatement("select idAppello,Data from appello where materia=CAST(? AS UNSIGNED INTEGER)");
 			smt.setString(1,materia);
+			
 			ResultSet rs= smt.executeQuery();//questo resultset mi prende appelli e date richiesti nella prepared
 			RequestDispatcher rd=request.getRequestDispatcher("studente.jsp");
 			request.setAttribute("materia", nomeMateria);
