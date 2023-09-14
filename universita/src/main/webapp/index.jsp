@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<link href="index.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
 		<title>Benvenuto!</title>
 	</head>
 	<header>
@@ -30,13 +31,12 @@
 			<form action="login" method="post">
 				<h2>Login</h2>
 				<h3>Email</h3>
-				<input type="text" name="username">
+				<input type="text" name="username" id="username">
 				<h3>Password</h3>
-				<input type="password" name="password">
-				<button type="submit" value="Accedi">Accedi</button>
+				<input type="password" name="password" id="password">
+				<button type="submit" value="Accedi" id="submit">Accedi</button>
 			</form>
 		</div>
 	</body>
-	<footer>
-	</footer>
+	<script src="obbligo_accesso.js"></script>
 </html>
