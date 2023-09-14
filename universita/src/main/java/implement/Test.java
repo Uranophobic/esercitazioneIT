@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class Test {
 
 	public static void main(String[] args) throws SQLException {
-		Iscrizione ap = new Iscrizione();
+		//Prenotazione ap = new Prenotazione();
 		
 		//ap.inserire(100, "Ingegneria del software"); // inserisce con 7
 		//ap.modifica(10, 101, "Ingegneria del software");
