@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import implement.DataFormato;
 
 
-
 /**
  * Servlet implementation class StampaStudenti
  */
@@ -79,10 +78,6 @@ public class StampaStudenti extends HttpServlet {
 			request.setAttribute("Data",Data.dataIngToIta(Data1));
 			request.setAttribute("elenco_studenti", rs1);
 			rd.forward(request, response);
-
-
-
-
 
 
 		} catch (SQLException | ClassNotFoundException e) {
