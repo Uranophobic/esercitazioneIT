@@ -31,10 +31,10 @@
 			<form action="login" method="post">
 				<h2>Login</h2>
 				<h3>Email</h3>
-				<input type="text" name="username">
+				<input type="text" name="username" id="username">
 				<h3>Password</h3>
-				<input type="password" name="password">
-				<button type="submit" value="Accedi">Accedi</button>
+				<input type="password" name="password" id="password">
+				<button type="submit" value="Accedi" id="submit">Accedi</button>
 			</form>
 		</div>
 	</body>

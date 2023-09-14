@@ -1,15 +1,17 @@
-$(document).ready(function()
-{
-$("#formlogin").submit(function()
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const submitButton = document.getElementById("submit");
+submitButton.disabled=true;
+usernameInput.addEventListener("input", buttonisDisabled);
+passwordInput.addEventListener("input", buttonisDisabled);
 
-{
-var nome=document.getElementById("utente").value;
-var passwor=document.getElementById("pw").value;
-if(nome=="" ){
-alert("Inseire un utente");
-return false;
-}else{
-return true;
+function buttonisDisabled() {
+  const usernameValue = usernameInput.value;
+  const passwordValue = passwordInput.value;
+
+  if (usernameValue.trim() !== "" && passwordValue.trim() !== "") {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
 }
-});
-});
