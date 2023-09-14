@@ -1,13 +1,9 @@
 package mypackage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -67,19 +63,20 @@ public class login extends HttpServlet {
 
 				String nome = rs4.getString("nome");
 				String cognome = rs4.getString("cognome");
-				int idProfessore = rs4.getInt("idProfessore");
+				int  idProfessore = rs4.getInt("idProfessore");
 				
 				ResultSet rs5 =lo.corso(idProfessore);
 				rs5.next();
-				int idcorso = rs5.getInt("idcorso");
-				String materia = rs5.getString("materia");
 				
-				ResultSet appelli = lo.appelli(idcorso);
+				String lezionemateria = rs5.getString("materia");
+			
+				ResultSet appelli = lo.appelli(lezionemateria);
+				
 				
 				session.setAttribute("nome", nome);
 				session.setAttribute("cognome", cognome);
 				RequestDispatcher rd4 = request.getRequestDispatcher("professore.jsp");
-				session.setAttribute("materia", materia);
+				session.setAttribute("materia", lezionemateria);
 				request.setAttribute("appelli", appelli);
 				rd4.forward(request, response);
 				

@@ -19,8 +19,8 @@ String data = (String) request.getAttribute("data");
 String materia2 = (String) request.getAttribute("materia2");
 %>
 <% if(matricola==null){
-	
-	response.sendRedirect("index.jsp");
+    
+    response.sendRedirect("index.jsp");
 }
 %>
 <p>Benvenuto studente:<%=matricola %></p> 
@@ -28,17 +28,17 @@ String materia2 = (String) request.getAttribute("materia2");
 <% if(res!=null) {%>
 <table border=1>
 <tr>
-<th>ID corso</th>
+<!-- <th>ID corso</th> -->
 <th>materia</th>
 <th>nome docente</th>
 <th>cognome docente</th>
 </tr>
 <%
-while(res.next()){	
+while(res.next()){    
 %>
 <tr>
-<th><%=res.getInt("idcorso") %></th>
-<th><%=res.getString("materia") %></th>
+<%-- <th><%=res.getInt("idcorso") %></th> --%>
+<th><%=res.getString("nome_materia") %></th>
 <th><%=res.getString("nome") %></th>
 <th><%=res.getString("cognome") %></th>
 <%} %>
@@ -49,6 +49,7 @@ while(res.next()){
 <form action="Prenotazione" method="post">
 Inserisci la prenotazione che vuoi effettuare
 <input type="number" name="materia">
+
 <input type="submit" value="Prenota">
 <%} %>
 </form>
@@ -71,7 +72,8 @@ while(res1.next()){
 </table>
 <form action="Prenota" method="post">
 Inserisci la prenotazione che vuoi effettuare
-<input type="number" name="appello">
+<input type="number" name="appello"> 
+
 <input type="submit" value="Prenota"></form>
 <%} %>
 <%if(messaggio!=null) %>

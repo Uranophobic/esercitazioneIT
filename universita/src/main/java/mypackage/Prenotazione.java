@@ -12,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 /**
@@ -52,9 +51,11 @@ public class Prenotazione extends HttpServlet {
 			smt1.setString(1, materia);
 			ResultSet rs1 = smt1.executeQuery();
 			rs1.next();//restituisce il nome della materia che vogliamo stampare
+			
 			String nomeMateria=rs1.getString(1);
 			PreparedStatement smt= conn.prepareStatement("select idAppello,Data from appello where materia=CAST(? AS UNSIGNED INTEGER)");
 			smt.setString(1,materia);
+			
 			ResultSet rs= smt.executeQuery();//questo resultset mi prende appelli e date richiesti nella prepared
 			RequestDispatcher rd=request.getRequestDispatcher("studente.jsp");
 			request.setAttribute("materia", nomeMateria);
