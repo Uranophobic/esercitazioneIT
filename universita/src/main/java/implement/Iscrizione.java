@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 public class Iscrizione  {
 
 	
-	public void inserire(int idStudente ,String materia ) {
+	public void inserire(String materia ) {
 		// TODO Auto-generated method stub
 
 	}
