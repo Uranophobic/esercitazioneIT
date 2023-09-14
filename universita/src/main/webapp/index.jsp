@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<link href="index.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
 		<title>Benvenuto!</title>
 	</head>
 	<header>
@@ -37,6 +38,5 @@
 			</form>
 		</div>
 	</body>
-	<footer>
-	</footer>
+	<script src="obbligo_accesso.js"></script>
 </html>
