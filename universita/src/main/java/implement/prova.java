@@ -1,9 +1,7 @@
-package implem;
+package implement;
 
 
 import java.sql.ResultSet;
-
-import data.DataFormato;
 
 public class prova {
 
