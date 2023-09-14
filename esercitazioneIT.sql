@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `universita` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `universita`;
--- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: universita
 -- ------------------------------------------------------
--- Server version	8.0.32
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,13 +25,15 @@ DROP TABLE IF EXISTS `appello`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `appello` (
-  `idAppello` int NOT NULL AUTO_INCREMENT,
-  `Data` date NOT NULL,
-  `Materia` int DEFAULT NULL,
-  PRIMARY KEY (`idAppello`),
-  KEY `da appello a corso_idx` (`Materia`),
-  CONSTRAINT `da appello a corso` FOREIGN KEY (`Materia`) REFERENCES `corso` (`idcorso`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+  `idappello` int NOT NULL AUTO_INCREMENT,
+  `data` date NOT NULL,
+  `aula` varchar(45) NOT NULL,
+  `orario` varchar(45) NOT NULL,
+  `materia` varchar(45) NOT NULL,
+  PRIMARY KEY (`idappello`),
+  KEY `materia_idx` (`materia`),
+  CONSTRAINT `materia nome` FOREIGN KEY (`materia`) REFERENCES `materia` (`nome_materia`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,35 +42,95 @@ CREATE TABLE `appello` (
 
 LOCK TABLES `appello` WRITE;
 /*!40000 ALTER TABLE `appello` DISABLE KEYS */;
-INSERT INTO `appello` VALUES (1,'2019-10-25',1);
+INSERT INTO `appello` VALUES (1,'2023-10-10','A2','9:00','Ingegneria del software'),(2,'2023-10-10','B4','10:00','Programmazione Object Oriented');
 /*!40000 ALTER TABLE `appello` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `corso`
+-- Table structure for table `iscrizione`
 --
 
-DROP TABLE IF EXISTS `corso`;
+DROP TABLE IF EXISTS `iscrizione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `corso` (
-  `idcorso` int NOT NULL AUTO_INCREMENT,
-  `Materia` varchar(25) DEFAULT NULL,
-  `Cattedra` int DEFAULT NULL,
-  PRIMARY KEY (`idcorso`),
-  KEY `da corso a prof_idx` (`Cattedra`),
-  CONSTRAINT `da corso a prof` FOREIGN KEY (`Cattedra`) REFERENCES `professore` (`idProfessore`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `iscrizione` (
+  `idiscrizione` int NOT NULL AUTO_INCREMENT,
+  `matr_stud` int NOT NULL,
+  `nome_mat` varchar(45) NOT NULL,
+  PRIMARY KEY (`idiscrizione`),
+  KEY `matric_idx` (`matr_stud`),
+  KEY `nome_mat_idx` (`nome_mat`),
+  CONSTRAINT `matric` FOREIGN KEY (`matr_stud`) REFERENCES `studente` (`matricola`),
+  CONSTRAINT `nome_mat` FOREIGN KEY (`nome_mat`) REFERENCES `materia` (`nome_materia`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='tabella che indica quale corso segue ogni studente (quindi a quale si è iscritto)';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `corso`
+-- Dumping data for table `iscrizione`
 --
 
-LOCK TABLES `corso` WRITE;
-/*!40000 ALTER TABLE `corso` DISABLE KEYS */;
-INSERT INTO `corso` VALUES (1,'Analisi I',1),(2,'Analisi II',2);
-/*!40000 ALTER TABLE `corso` ENABLE KEYS */;
+LOCK TABLES `iscrizione` WRITE;
+/*!40000 ALTER TABLE `iscrizione` DISABLE KEYS */;
+INSERT INTO `iscrizione` VALUES (1,100,'Architettura degli elaboratori'),(2,101,'Architettura degli elaboratori'),(3,102,'Architettura degli elaboratori'),(4,100,'Programmazione Object Oriented'),(5,101,'Programmazione Object Oriented'),(6,102,'Ingegneria del software');
+/*!40000 ALTER TABLE `iscrizione` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `lezione`
+--
+
+DROP TABLE IF EXISTS `lezione`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lezione` (
+  `idcorso` int NOT NULL,
+  `materia` varchar(45) NOT NULL,
+  `cattedra` int DEFAULT NULL,
+  `orario` varchar(45) NOT NULL,
+  `aula` varchar(45) NOT NULL,
+  PRIMARY KEY (`idcorso`),
+  KEY `materia _idx` (`materia`),
+  CONSTRAINT `materia ` FOREIGN KEY (`materia`) REFERENCES `materia` (`nome_materia`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lezione`
+--
+
+LOCK TABLES `lezione` WRITE;
+/*!40000 ALTER TABLE `lezione` DISABLE KEYS */;
+INSERT INTO `lezione` VALUES (1,'Architettura degli elaboratori',NULL,'9:00','A1'),(2,'Ingegneria del software',NULL,'12:00','B2'),(3,'Programmazione Object Oriented',NULL,'14:00','C4');
+/*!40000 ALTER TABLE `lezione` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `materia`
+--
+
+DROP TABLE IF EXISTS `materia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `materia` (
+  `nome_materia` varchar(45) NOT NULL,
+  `id_prof` int NOT NULL,
+  `anno_corso` varchar(45) NOT NULL,
+  `semestre` varchar(45) NOT NULL,
+  `cfu` int NOT NULL,
+  PRIMARY KEY (`nome_materia`),
+  KEY `id prof_idx` (`id_prof`),
+  CONSTRAINT `identificativo` FOREIGN KEY (`id_prof`) REFERENCES `professore` (`idprofessore`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `materia`
+--
+
+LOCK TABLES `materia` WRITE;
+/*!40000 ALTER TABLE `materia` DISABLE KEYS */;
+INSERT INTO `materia` VALUES ('Architettura degli elaboratori',1,'1','1',9),('Ingegneria del software',3,'3','2',12),('Programmazione Object Oriented',2,'2','1',10);
+/*!40000 ALTER TABLE `materia` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -79,15 +141,16 @@ DROP TABLE IF EXISTS `prenotazione`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `prenotazione` (
-  `idpren` int NOT NULL AUTO_INCREMENT,
-  `stud_prenotato` int DEFAULT NULL,
-  `app_prenotato` int DEFAULT NULL,
-  PRIMARY KEY (`idpren`),
-  KEY `da prenotazione a stud_idx` (`stud_prenotato`),
-  KEY `da prenotazione ad app_idx` (`app_prenotato`),
-  CONSTRAINT `da prenotazione a stud` FOREIGN KEY (`stud_prenotato`) REFERENCES `studente` (`Matricola`),
-  CONSTRAINT `da prenotazione ad app` FOREIGN KEY (`app_prenotato`) REFERENCES `appello` (`idAppello`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `idprenotazione` int NOT NULL AUTO_INCREMENT,
+  `id_prof` varchar(45) DEFAULT NULL,
+  `id_app` int NOT NULL,
+  `matricola_stud` int NOT NULL,
+  PRIMARY KEY (`idprenotazione`),
+  KEY `appello id_idx` (`id_app`),
+  KEY `matricola_idx` (`matricola_stud`),
+  CONSTRAINT `appello id` FOREIGN KEY (`id_app`) REFERENCES `appello` (`idappello`),
+  CONSTRAINT `matricola` FOREIGN KEY (`matricola_stud`) REFERENCES `studente` (`matricola`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +159,7 @@ CREATE TABLE `prenotazione` (
 
 LOCK TABLES `prenotazione` WRITE;
 /*!40000 ALTER TABLE `prenotazione` DISABLE KEYS */;
-INSERT INTO `prenotazione` VALUES (2,2,1),(3,1,1),(4,1,1);
+INSERT INTO `prenotazione` VALUES (1,'1',1,100),(2,'2',2,101),(3,'3',2,102);
 /*!40000 ALTER TABLE `prenotazione` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -113,7 +176,7 @@ DECLARE existing_prenotazione INT;
 
 SELECT COUNT(*) INTO existing_prenotazione
 FROM prenotazione
-WHERE stud_prenotato = NEW.stud_prenotato AND app_prenotato = NEW.app_prenotato;
+WHERE matricola_stud = NEW.matricola_stud AND id_app = NEW.id_app;
 
 IF existing_prenotazione > 0 THEN
 SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Una prenotazione per questo studente e appello esiste già.';
@@ -133,14 +196,14 @@ DROP TABLE IF EXISTS `professore`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `professore` (
-  `idProfessore` int NOT NULL AUTO_INCREMENT,
+  `idprofessore` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `cognome` varchar(45) NOT NULL,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `tipo_utente` char(1) NOT NULL,
-  `nome` varchar(45) DEFAULT NULL,
-  `cognome` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idProfessore`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  PRIMARY KEY (`idprofessore`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,8 +212,36 @@ CREATE TABLE `professore` (
 
 LOCK TABLES `professore` WRITE;
 /*!40000 ALTER TABLE `professore` DISABLE KEYS */;
-INSERT INTO `professore` VALUES (1,'prof1','prof1','p','Mario','Rossi'),(2,'prof2','prof2','p','Valerio','Bianchi');
+INSERT INTO `professore` VALUES (1,'Nicola','Gravino','n.gravino','n.gravino'),(2,'Sara','Rossi','s.rossi','s.rossi'),(3,'Mario','Verdi','m.verdi','m.verdi');
 /*!40000 ALTER TABLE `professore` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `segreteria`
+--
+
+DROP TABLE IF EXISTS `segreteria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `segreteria` (
+  `idsegreteria` int NOT NULL,
+  `nome` varchar(45) NOT NULL,
+  `cognome` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`idsegreteria`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `segreteria`
+--
+
+LOCK TABLES `segreteria` WRITE;
+/*!40000 ALTER TABLE `segreteria` DISABLE KEYS */;
+INSERT INTO `segreteria` VALUES (1,'Giorgia','Grigio','g.grigio','g.grigio'),(2,'Francesco','Pio','f.pio','f.pio');
+/*!40000 ALTER TABLE `segreteria` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -161,14 +252,15 @@ DROP TABLE IF EXISTS `studente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `studente` (
-  `Matricola` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(10) DEFAULT NULL,
-  `password` varchar(5) DEFAULT NULL,
-  `tipo_utente` char(1) DEFAULT NULL,
-  `nome` varchar(45) DEFAULT NULL,
-  `cognome` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`Matricola`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+  `matricola` int NOT NULL,
+  `nome` varchar(45) NOT NULL,
+  `cognome` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `corso_di_laurea` varchar(45) NOT NULL,
+  `anno_immatricolazione` varchar(45) NOT NULL,
+  PRIMARY KEY (`matricola`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,8 +269,39 @@ CREATE TABLE `studente` (
 
 LOCK TABLES `studente` WRITE;
 /*!40000 ALTER TABLE `studente` DISABLE KEYS */;
-INSERT INTO `studente` VALUES (1,'stud1','stud1','s','Simone','Verdi'),(2,'stud2','stud2','s','Emma','Marrone');
+INSERT INTO `studente` VALUES (100,'Alessia','Crispo','a.crispo','a.crispo','Triennale Informatica','2023'),(101,'Giovanni','Russo','g.russo','g.russo','Triennale in Ingegneria Informatica','2023'),(102,'Eugenia','Esposito','e.esposito','e.esposito','Triennale Informatica','2023');
 /*!40000 ALTER TABLE `studente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket`
+--
+
+DROP TABLE IF EXISTS `ticket`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ticket` (
+  `idticket` int NOT NULL AUTO_INCREMENT,
+  `idstud` int NOT NULL,
+  `idammministrativo` int NOT NULL,
+  `richiesta` varchar(45) NOT NULL,
+  `chiuso` tinyint DEFAULT NULL,
+  PRIMARY KEY (`idticket`),
+  KEY `ids_idx` (`idstud`),
+  KEY `id ammm_idx` (`idammministrativo`),
+  CONSTRAINT `id ammm` FOREIGN KEY (`idammministrativo`) REFERENCES `segreteria` (`idsegreteria`),
+  CONSTRAINT `ids` FOREIGN KEY (`idstud`) REFERENCES `studente` (`matricola`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket`
+--
+
+LOCK TABLES `ticket` WRITE;
+/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (1,100,1,'Come posso chiedere il tirocinio?',0),(2,101,2,'Quanto tempo ho per consegnare la tesi?',1);
+/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -198,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-13 10:48:06
+-- Dump completed on 2023-09-14  9:57:08
