@@ -1,23 +1,32 @@
 @charset "ISO-8859-1";
 
-.tabella{
-    border-collapse: collapse;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    border: 3px solid black;
+table {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-spacing: 0px !important;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  width: 100%;
 }
-  
-th{
- 	height: 40px;
- 	background-color: lightblue;
-	border-bottom: 1px solid black;
-  	width: 15%;
+
+table td:not(:last-child), table th:not(:last-child){
+	border-right: 1px solid black;
 }
-  
-td{
+
+th {
 	height: 25px;
 	padding: 12px;
+	background-color: lightblue;
+	border-bottom: 1px solid black;
+}
+
+td {
+	background-color: white;
+	height: 25px;
+	padding: 12px;
+	border-bottom: 1px solid black;
 }
 
 h1{
@@ -33,10 +42,13 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 30%;
+	margin:0 auto;
 }
 
-button[type=submit]{
-    width: 38% !important;
-    margin-top: 10%;
+.bottoneP{
+	border-radius:0px 0px 20px 20px !important;
+	width: 100%!important;
+	margin: 5px !important;
 }
   

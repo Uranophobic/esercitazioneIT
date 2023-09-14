@@ -39,44 +39,42 @@
 	
 	        <form action="StampaStudenti" method="post">
 	            <% if(appelli!=null){ %>
-				<p class="pclass"> Per la sua materia: <%=materia %> sono disponibili i seguenti appelli </p>
-				<table border=4>
-				    <tr>
-				        <th></th>
-				        <th>ID Appello</th>
-				        <th>Data</th>
-				    </tr>
-				    
-				    <% while(appelli.next()){ %>
-					<tr>
-						<td><input type="radio" name="ID_appello" value=<%=appelli.getInt(1)%>></td>
-						<td><%=appelli.getInt(1)%></td>
-						<td><%=appelli.getDate("Data") %></td>
-					</tr>
-				</table><button type="submit" value="Stampa">Vai</button>
+					<p class="pclass"> Per la sua materia: <%=materia %> sono disponibili i seguenti appelli </p>
+					<table>
+					    <tr>
+					        <th></th>
+					        <th>ID Appello</th>
+					        <th>Data</th>
+					    </tr>
+					    
+					    <% while(appelli.next()){ %>
+							<tr>
+								<td><input type="radio" name="ID_appello" value=<%=appelli.getInt(1)%>></td>
+								<td><%=appelli.getInt(1)%></td>
+								<td><%=appelli.getDate("Data") %></td>
+							</tr>
+							</table>
+							<button type="submit" value="Stampa" class="bottoneP">Vai</button>
+						<% }%>  
 				<% }%>
-				    
-				
 			</form>
-	
-			<% }%>
 			<% if(elenco!=null){%>
-			
-			<p>Per l'esame <%=nomeMateria %> in data <%=Data %> si sono prenotati i seguenti studenti: </p>
-			<table border=4>
-			    <tr>
-			        <th>Nome</th>
-			        <th>Cognome</th>
-			        <th>Matricola</th>
-			    </tr>
-			    <% while(elenco.next()){ %>
-				<tr>
-			    <td><%=elenco.getString("nome")%></td>
-				<td><%=elenco.getString("cognome")%></td>
-				<td><%=elenco.getString("Matricola") %></td>
-				<% }%>
-				<%} %>
-			</table>
+				<p>Per l'esame <%=nomeMateria %> in data <%=Data %> si sono prenotati i seguenti studenti: </p>
+				<table>
+				    <tr>
+				        <th>Nome</th>
+				        <th>Cognome</th>
+				        <th>Matricola</th>
+				    </tr>
+				    <% while(elenco.next()){ %>
+						<tr>
+						    <td><%=elenco.getString("nome")%></td>
+							<td><%=elenco.getString("cognome")%></td>
+							<td><%=elenco.getString("Matricola") %></td>
+						</tr>
+					<% }%>
+				</table>
+			<%} %>
 	    </section>
 	</body>
 	<footer>

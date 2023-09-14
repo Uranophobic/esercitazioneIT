@@ -93,4 +93,7 @@
 	        <p>Prenotazione effettuata con successo in data <%=data%> per il corso <%=materia2%></p>
 	    <%}%>
 	</body>
+	<footer>
+        <p>&copy; Università  degli Studi di Napoli Federico II</p>
+  	</footer>
 </html>
