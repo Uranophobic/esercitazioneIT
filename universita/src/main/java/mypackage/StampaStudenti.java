@@ -44,9 +44,10 @@ public class StampaStudenti extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String idAppello= request.getParameter("ID_appello");
-		Connection conn=Connessione.getCon();
+		Connection conn=null;
 
 		try {
+			conn = Connessione.getInstance().getConnection();
 			/*PreparedStatement smt1=conn.prepareStatement("select stud_prenotato from prenotazione where app_prenotato=CAST(? AS UNSIGNED INTEGER)");
 			smt1.setString(1, idAppello);
 			ResultSet rs1=smt1.executeQuery();
@@ -79,7 +80,7 @@ public class StampaStudenti extends HttpServlet {
 
 
 
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 
 			e.printStackTrace();
 		}

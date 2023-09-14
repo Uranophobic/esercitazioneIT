@@ -45,8 +45,9 @@ public class Prenotazione extends HttpServlet {
 		// TODO Auto-generated method stub
 		String materia=request.getParameter("materia");
 		
-		Connection conn= Connessione.getCon();
+		Connection conn= null;
 		try {
+			conn = Connessione.getInstance().getConnection();
 			PreparedStatement smt1=conn.prepareStatement("select materia from corso where idcorso=CAST(? AS UNSIGNED INTEGER)");
 			smt1.setString(1, materia);
 			ResultSet rs1 = smt1.executeQuery();
@@ -59,7 +60,7 @@ public class Prenotazione extends HttpServlet {
 			request.setAttribute("materia", nomeMateria);
 			request.setAttribute("elenco_appelli", rs);
 			rd.forward(request, response);
-		}catch (SQLException e) {
+		}catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
 		}
