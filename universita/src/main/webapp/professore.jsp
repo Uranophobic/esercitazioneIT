@@ -1,3 +1,4 @@
+<%@page import="data.DataFormato"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import= "java.sql.*" %>
@@ -16,7 +17,7 @@ ResultSet elenco=(ResultSet)request.getAttribute("elenco_studenti");
 String nomeMateria= (String)request.getAttribute("Materia");
 String Data= (String)request.getAttribute("Data");
 
-
+DataFormato n = new DataFormato();
 %>
 <% if(nome==null && cognome==null){
 	
@@ -39,7 +40,9 @@ while(appelli.next()){
 %>
 <tr>
 <th><%=appelli.getInt(1)%></th>
-<th><%=appelli.getDate("Data") %></th>
+
+<th><%=n.dataIngToIta(appelli.getString("data")) %>
+</th>
 </tr>
 </table>
 <% }%>
@@ -51,7 +54,7 @@ while(appelli.next()){
 }%>
 <% if(elenco!=null){%>	
 
-<p>Per l'esame<%=nomeMateria %> in data<%=Data %>si sono prenotati i seguenti studenti: </p>
+<p>Per l'esame <%=nomeMateria %> in data <%= Data %> si sono prenotati i seguenti studenti: </p>
 <table border=1>
 <tr>
 <th>Nome</th>

@@ -52,6 +52,7 @@ public class Prenotazione extends HttpServlet {
 			smt1.setString(1, materia);
 			ResultSet rs1 = smt1.executeQuery();
 			rs1.next();//restituisce il nome della materia che vogliamo stampare
+			
 			String nomeMateria=rs1.getString(1);
 			PreparedStatement smt= conn.prepareStatement("select idAppello,Data from appello where materia=CAST(? AS UNSIGNED INTEGER)");
 			smt.setString(1,materia);

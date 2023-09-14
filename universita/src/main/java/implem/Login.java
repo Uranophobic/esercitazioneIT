@@ -63,11 +63,17 @@ public class Login {
 		}
 		return rsr;
 	}
-	public ResultSet corso(int idprofe) {
+	public ResultSet corso(int  idpro) {
 		ResultSet rs5 = null;
 		try {
-			PreparedStatement smt5=conn.prepareStatement("select idcorso, materia from corso where cattedra=?");
-			smt5.setInt(1, idprofe);
+			
+			PreparedStatement smt6=conn.prepareStatement("select nome_materia from materia where id_prof=?");
+			smt6.setInt(1, idpro);
+			ResultSet rs6 = smt6.executeQuery();
+			rs6.next();
+			String materia = rs6.getString("nome_materia");
+			PreparedStatement smt5=conn.prepareStatement("select idcorso, materia from lezione where materia=?");
+			smt5.setString(1,materia);
 			 rs5=smt5.executeQuery();
 		
 		} catch  (SQLException e) {
@@ -77,13 +83,15 @@ public class Login {
 		
 	}
 
-	public ResultSet appelli(int idcorso) {
+	public ResultSet appelli(String materia) {
 		ResultSet appelli = null;
 		try {
+			
 			conn = Connessione.getInstance().getConnection();
-			PreparedStatement smt6=conn.prepareStatement("select idAppello,Data from appello where Materia=?");
-			smt6.setInt(1, idcorso);
+			PreparedStatement smt6=conn.prepareStatement("select idAppello,data from appello where materia=?");
+			smt6.setString(1, materia);
 			 appelli=smt6.executeQuery();
+		
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
@@ -94,7 +102,7 @@ public class Login {
 		try {
 			conn = Connessione.getInstance().getConnection();
 			Statement smt2=conn.createStatement();
-			 rs2=smt2.executeQuery("select idcorso,materia,nome,cognome from corso join professore on cattedra=idprofessore");
+			 rs2=smt2.executeQuery("select nome_materia,nome,cognome from materia join professore on id_prof=idprofessore");
 			
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
