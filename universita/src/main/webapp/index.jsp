@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
@@ -14,18 +13,6 @@
 	</header>
 	<body>
 		<img src="background1.jpg" class="background">
-	
-		<%
-		String messaggio= (String)request.getAttribute("messaggio");
-		%>
-		<% 
-		if(messaggio!=null){%>   
-			<p>
-				<a>
-				<%out.print(messaggio);%></a> <%-- si poteva fare anche con l'espressione <%=messaggio%> --%>
-			</p>
-			<%} %>
-		
 		
 		<div class="form">
 			<form action="login" method="post">
@@ -34,9 +21,17 @@
 				<input type="text" name="username" id="username">
 				<h3>Password</h3>
 				<input type="password" name="password" id="password">
+				<button type="button" id="mostra_password">Mostra Password</button>
+				<span class="errore" id="errore">
+					<%String messaggio= (String)request.getAttribute("messaggio");%>
+					<% 
+					if(messaggio!=null){%>   
+						<p ><%out.print("Username o Password non sono corretti");%></p>
+					<%} %>
+				</span>
 				<button type="submit" value="Accedi" id="submit">Accedi</button>
 			</form>
 		</div>
 	</body>
-	<script src="obbligo_accesso.js"></script>
+	<script src="./obbligo_accesso.js"></script>
 </html>

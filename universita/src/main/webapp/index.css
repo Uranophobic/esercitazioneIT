@@ -8,6 +8,14 @@
 	margin: -20px;
 }
 
+.errore{
+	background-color: #f5c6cb !important;
+	width: 80% !important;
+	text-align: center;
+	margin-top: 5%;
+	border-radius: 15px;
+}
+
 
 .form{
 	background-color: white;

@@ -4,7 +4,7 @@
 <html>
 
 	<head>
-		<script src="JS.js"></script>
+		<script src="menu.js"></script>
 		<meta charset="ISO-8859-1">
 		<link rel="stylesheet" href="professore.css">
 		<link rel="stylesheet" href="style.css">
