@@ -59,21 +59,23 @@
 				<% }%>
 			</form>
 			<% if(elenco!=null){%>
-				<p>Per l'esame <%=nomeMateria %> in data <%=Data %> si sono prenotati i seguenti studenti: </p>
-				<table>
-				    <tr>
-				        <th>Nome</th>
-				        <th>Cognome</th>
-				        <th>Matricola</th>
-				    </tr>
-				    <% while(elenco.next()){ %>
-						<tr>
-						    <td><%=elenco.getString("nome")%></td>
-							<td><%=elenco.getString("cognome")%></td>
-							<td><%=elenco.getString("Matricola") %></td>
-						</tr>
-					<% }%>
-				</table>
+				<div class="div_table">
+				<p>Per l'esame <b><%=nomeMateria %></b> in data <b><%=Data %></b> si sono prenotati i seguenti studenti: </p>
+					<table>
+					    <tr>
+					        <th>Nome</th>
+					        <th>Cognome</th>
+					        <th>Matricola</th>
+					    </tr>
+					    <% while(elenco.next()){ %>
+							<tr>
+							    <td><%=elenco.getString("nome")%></td>
+								<td><%=elenco.getString("cognome")%></td>
+								<td><%=elenco.getString("Matricola") %></td>
+							</tr>
+						<% }%>
+					</table>
+				</div>
 			<%} %>
 	    </section>
 	</body>

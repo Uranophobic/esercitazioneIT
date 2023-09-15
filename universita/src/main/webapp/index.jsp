@@ -6,6 +6,7 @@
 		<meta charset="ISO-8859-1">
 		<link href="index.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
+		<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 		<title>Benvenuto!</title>
 	</head>
 	<header>
@@ -18,10 +19,16 @@
 			<form action="login" method="post">
 				<h2>Login</h2>
 				<h3>Username</h3>
-				<input type="text" name="username" id="username">
+				<input type="text" name="username" id="username" class="username">
 				<h3>Password</h3>
-				<input type="password" name="password" id="password">
-				<button type="button" id="mostra_password">Mostra Password</button>
+				<div class="div_pass">
+					<div class="pass_in">
+						<input type="password" name="password" id="password">
+					</div>
+					<div class="icona">
+						<box-icon class="mostra_pss" id="hide" type='solid' name='hide'></box-icon>
+					</div>
+				</div>
 				<span class="errore" id="errore">
 					<%String messaggio= (String)request.getAttribute("messaggio");%>
 					<% 
