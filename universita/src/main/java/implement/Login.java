@@ -57,6 +57,27 @@ public class Login {
 		}
 		return rsr;
 	}
+	public ResultSet segre(String username, String password) {
+		ResultSet rsr = null;
+
+		try {
+			conn = Connessione.getInstance().getConnection();
+			Statement smt3= conn.createStatement();
+			ResultSet rs3= smt3.executeQuery("select username,password from segreteria where username='"+username+"' and password ='"+password+"'");
+			
+			while(rs3.next()) {
+				if(rs3.getString("username").equals(username)&&rs3.getString("password").equals(password)){ 
+					PreparedStatement smt4=conn.prepareStatement("select nome,cognome,idsegreteria from segreteria where username=?"); 
+					smt4.setString(1, username);
+					 rsr= smt4.executeQuery();
+				}
+			}
+
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		return rsr;
+	}
 
 	
 	public ResultSet corso(int idprofe) {

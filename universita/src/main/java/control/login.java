@@ -83,7 +83,25 @@ public class login extends HttpServlet {
 				request.setAttribute("tabella_corso", lo.tabella());
 				rd.forward(request, response);
 
-			} else {
+			} else if (lo.segre(username, password) != null) {
+
+				lo.tabella();
+				ResultSet rs = lo.segre(username, password);
+				rs.next();
+				String idsegretaria = rs.getString(1);
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
+				session = request.getSession(true); // se la sessione esiste(esiste l'oggetto session) altrimenti ti
+													// crea un oggetto di tipo HttpSession
+				session.setAttribute("idsegretaria", idsegretaria);
+				session.setAttribute("nome", nome);
+				session.setAttribute("cognome", cognome);
+				RequestDispatcher rd = request.getRequestDispatcher("segretaria.jsp"); // con resultset abbiamo preso la
+																						// tabella dei corsi disponibili
+				
+				rd.forward(request, response);
+
+			}else {
 
 				// ci vuole un controllo
 				RequestDispatcher rd3 = request.getRequestDispatcher("index.jsp");
