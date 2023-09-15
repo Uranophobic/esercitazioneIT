@@ -7,19 +7,20 @@ import java.sql.SQLException;
 
 import control.Connessione;
 
-public class Iscrizione  {
-
+public class Professore {
 	private Connection con = null;
 
 	// non mettere la primary-key nell'inserimento
-	public void inserire(int matr_stud, String nome_mat ) {
+	public void inserire(String nome, String cognome, String username,String password ) {
 		
-		String query = "INSERT INTO iscrizione(matr_stud, nome_mat) values(?,?)";
+		String query = "INSERT INTO professore(nome, cognome, username,password) values(?,?,?,?)";
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setInt(1, matr_stud);
-			pst.setString(2, nome_mat);
+			pst.setString(1, nome);
+			pst.setString(2, cognome);
+			pst.setString(3, username);
+			pst.setString(4, password);
 			pst.executeUpdate();
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -27,16 +28,17 @@ public class Iscrizione  {
 
 	}
 	
-
 	// non fare set per primary-key
-	public void modifica(int idiscrizione, int matr_stud, String nome_mat ) {
-        String query = "UPDATE iscrizione SET matr_stud = ?, nome_mat = ? WHERE idiscrizione ='"+idiscrizione+"'";
+	public void modifica(int idprofessore,String nome, String cognome, String username,String password) {
+        String query = "UPDATE professore SET nome = ?, cognome = ?, username = ?, password = ? WHERE idprofessore ='"+idprofessore+"'";
 
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setInt(1, matr_stud);
-			pst.setString(2, nome_mat);
+			pst.setString(1, nome);
+			pst.setString(2, cognome);
+			pst.setString(3, username);
+			pst.setString(4, password);
 			pst.executeUpdate();
 			
 		} catch (SQLException | ClassNotFoundException e) {
@@ -45,8 +47,8 @@ public class Iscrizione  {
 	}
 
 	// eliminare sempre per primary-key
-    public void elimina(int idiscrizione) {
-        String query = "DELETE FROM iscrizione WHERE idiscrizione ='"+idiscrizione+"'";
+    public void elimina(int idprofessore) {
+        String query = "DELETE FROM professore WHERE idprofessore ='"+idprofessore+"'";
         
         try {
             con = Connessione.getInstance().getConnection();
@@ -59,7 +61,7 @@ public class Iscrizione  {
 
     public ResultSet lista() {
         ResultSet result = null;
-        String query = "SELECT * FROM iscrizione";
+        String query = "SELECT * FROM professore";
         try {
             con = Connessione.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement(query);
@@ -70,9 +72,9 @@ public class Iscrizione  {
         return result;
     }
     
-    public ResultSet ricerca(int idiscrizione) {
+    public ResultSet ricerca(int idprofessore) {
         ResultSet result = null;
-        String query = "SELECT * FROM iscrizione WHERE idiscrizione ='"+idiscrizione+"'";
+        String query = "SELECT * FROM professore WHERE idprofessore ='"+idprofessore+"'";
         try {
             con = Connessione.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement(query);
@@ -82,5 +84,5 @@ public class Iscrizione  {
         }
         return result;
     }
-
+	
 }

@@ -7,19 +7,23 @@ import java.sql.SQLException;
 
 import control.Connessione;
 
-public class Iscrizione  {
+public class Materia {
 
+	
 	private Connection con = null;
 
 	// non mettere la primary-key nell'inserimento
-	public void inserire(int matr_stud, String nome_mat ) {
+	public void inserire(String nome_materia, int id_prof, int anno_corso, int semestre, int cfu ) {
 		
-		String query = "INSERT INTO iscrizione(matr_stud, nome_mat) values(?,?)";
+		String query = "INSERT INTO materia(nome_materia, id_prof, anno_corso, semestre, cfu) values(?,?,?,?,?)";
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setInt(1, matr_stud);
-			pst.setString(2, nome_mat);
+			pst.setString(1, nome_materia);
+			pst.setInt(2, id_prof);
+			pst.setInt(3, anno_corso);
+			pst.setInt(4, semestre);
+			pst.setInt(5, cfu);
 			pst.executeUpdate();
 		} catch (SQLException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -27,16 +31,18 @@ public class Iscrizione  {
 
 	}
 	
-
 	// non fare set per primary-key
-	public void modifica(int idiscrizione, int matr_stud, String nome_mat ) {
-        String query = "UPDATE iscrizione SET matr_stud = ?, nome_mat = ? WHERE idiscrizione ='"+idiscrizione+"'";
+	public void modifica(String nome_materia, int id_prof, int anno_corso, int semestre, int cfu, String nuovo_nome_materia) {
+		String query = "UPDATE materia SET nome_materia = ?, id_prof = ?, anno_corso = ?, semestre = ?, cfu = ? WHERE nome_materia ='"+nome_materia+"'";
 
 		try {
 			con = Connessione.getInstance().getConnection();
 			PreparedStatement pst = con.prepareStatement(query);
-			pst.setInt(1, matr_stud);
-			pst.setString(2, nome_mat);
+			pst.setString(1,nuovo_nome_materia);
+			pst.setInt(2, id_prof);
+			pst.setInt(3, anno_corso);
+			pst.setInt(4, semestre);
+			pst.setInt(5, cfu);
 			pst.executeUpdate();
 			
 		} catch (SQLException | ClassNotFoundException e) {
@@ -45,8 +51,8 @@ public class Iscrizione  {
 	}
 
 	// eliminare sempre per primary-key
-    public void elimina(int idiscrizione) {
-        String query = "DELETE FROM iscrizione WHERE idiscrizione ='"+idiscrizione+"'";
+    public void elimina(String nome_materia) {
+        String query = "DELETE FROM materia WHERE nome_materia ='"+nome_materia+"'";
         
         try {
             con = Connessione.getInstance().getConnection();
@@ -59,7 +65,7 @@ public class Iscrizione  {
 
     public ResultSet lista() {
         ResultSet result = null;
-        String query = "SELECT * FROM iscrizione";
+        String query = "SELECT * FROM materia";
         try {
             con = Connessione.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement(query);
@@ -70,9 +76,9 @@ public class Iscrizione  {
         return result;
     }
     
-    public ResultSet ricerca(int idiscrizione) {
+    public ResultSet ricerca(String nome_materia) {
         ResultSet result = null;
-        String query = "SELECT * FROM iscrizione WHERE idiscrizione ='"+idiscrizione+"'";
+        String query = "SELECT * FROM materia WHERE nome_materia ='"+nome_materia+"'";
         try {
             con = Connessione.getInstance().getConnection();
             PreparedStatement pst = con.prepareStatement(query);
@@ -82,5 +88,5 @@ public class Iscrizione  {
         }
         return result;
     }
-
+	
 }
