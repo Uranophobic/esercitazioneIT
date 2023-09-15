@@ -90,8 +90,8 @@
 	        <p><%=messaggio%></p>
 		<%} else {%><%} %>
 		<% if (materia2 != null && data != null) {%>
-	        <p>Prenotazione effettuata con successo in data <%=data%> per il corso <%=materia2%></p>
-	    <%}%>
+	        <p>Prenotazione effettuata con successo in data <b><%=data%></b> per il corso <b><%=materia2%></b></p>
+	    <%} else {%><%}%>
 	</body>
 	<footer>
         <p>&copy; Università  degli Studi di Napoli Federico II</p>

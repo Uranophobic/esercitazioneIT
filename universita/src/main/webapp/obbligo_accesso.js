@@ -2,12 +2,11 @@ const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const submitButton = document.getElementById("submit");
 const span = document.getElementById("errore");
-const mostrapassword = document.getElementById("mostra_password");
+const hide = document.getElementById("hide");
 let check = false;
 submitButton.disabled=true;
 usernameInput.addEventListener("input", buttonisDisabled);
 passwordInput.addEventListener("input", buttonisDisabled);
-console.log(span);
 function buttonisDisabled() {
   const usernameValue = usernameInput.value;
   const passwordValue = passwordInput.value;
@@ -20,11 +19,14 @@ function buttonisDisabled() {
     submitButton.disabled = true;
   } 
 } 
-mostrapassword.addEventListener("click", (()=>{
+hide.addEventListener("click", ((e)=>{
+	e.stopPropagation();
 	check = !check
 	if (check){
 		password.type = "text";
+		hide.setAttribute("name","show");
 	}else{
 		password.type = "password";
+		hide.setAttribute("name","hide");
 	}
 }))

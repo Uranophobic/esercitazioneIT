@@ -1,5 +1,4 @@
 @charset "ISO-8859-1";
-
 table {
   margin-left: auto;
   margin-right: auto;
@@ -9,6 +8,11 @@ table {
   border-right: 1px solid black;
   border-left: 1px solid black;
   width: 100%;
+}
+
+.div_table{
+	width: 30%; 
+	margin:0 auto;
 }
 
 table td:not(:last-child), table th:not(:last-child){
