@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,14 +48,15 @@ public class Prenotazione extends HttpServlet {
 		Connection conn= null;
 		try {
 			conn = Connessione.getInstance().getConnection();
-			PreparedStatement smt1=conn.prepareStatement("select materia from corso where idcorso=CAST(? AS UNSIGNED INTEGER)");
+			
+			PreparedStatement smt1=conn.prepareStatement("select materia from lezione where idcorso=CAST(? AS UNSIGNED INTEGER)");
 			smt1.setString(1, materia);
 			ResultSet rs1 = smt1.executeQuery();
 			rs1.next();//restituisce il nome della materia che vogliamo stampare
 			
 			String nomeMateria=rs1.getString(1);
 			PreparedStatement smt= conn.prepareStatement("select idAppello,Data from appello where materia=CAST(? AS UNSIGNED INTEGER)");
-			smt.setString(1,materia);
+			smt.setString(1,nomeMateria);
 			
 			ResultSet rs= smt.executeQuery();//questo resultset mi prende appelli e date richiesti nella prepared
 			RequestDispatcher rd=request.getRequestDispatcher("studente.jsp");

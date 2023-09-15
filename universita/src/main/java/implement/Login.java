@@ -104,7 +104,7 @@ public class Login {
 			conn = Connessione.getInstance().getConnection();
 			Statement smt2=conn.createStatement();
 
-			 rs2=smt2.executeQuery("select nome_materia,nome,cognome from materia join professore on id_prof=idprofessore");
+			 rs2=smt2.executeQuery("select idcorso,materia ,nome,cognome from lezione, professore, materia where materia = nome_materia and id_prof = idprofessore");
 			
 
 		} catch (SQLException | ClassNotFoundException e) {
