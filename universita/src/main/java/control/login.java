@@ -96,7 +96,7 @@ public class login extends HttpServlet {
 				session.setAttribute("idsegretaria", idsegretaria);
 				session.setAttribute("nome", nome);
 				session.setAttribute("cognome", cognome);
-				RequestDispatcher rd = request.getRequestDispatcher("segreteria.jsp"); // con resultset abbiamo preso la
+				RequestDispatcher rd = request.getRequestDispatcher("segretaria.jsp"); // con resultset abbiamo preso la
 																						// tabella dei corsi disponibili
 				
 				rd.forward(request, response);
