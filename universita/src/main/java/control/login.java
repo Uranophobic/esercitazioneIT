@@ -86,9 +86,13 @@ public class login extends HttpServlet {
 				ResultSet rs= lo.student(username, password);
 				rs.next();
 				String matricola = rs.getString(1);
+				String nome = rs.getString("nome");
+				String cognome = rs.getString("cognome");
 				session = request.getSession(true); // se la sessione esiste(esiste l'oggetto session) altrimenti ti
 													// crea un oggetto di tipo HttpSession
 				session.setAttribute("matricola", matricola);
+				session.setAttribute("nome", nome);
+				session.setAttribute("cognome", cognome);
 				RequestDispatcher rd = request.getRequestDispatcher("studente.jsp"); // con resultset abbiamo preso la
 																						// tabella dei corsi disponibili
 				request.setAttribute("tabella_corso", lo.tabella());
