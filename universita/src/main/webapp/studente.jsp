@@ -8,25 +8,12 @@
 		<link rel="stylesheet" href="studente.css">
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="menu.css">
-		<script src="menu.js"></script>
+		<script src="menu.js"defear></script>
+		<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 		<meta charset="ISO-8859-1">
 		<title>Area Studenti</title>
 	</head>
-	<header>
-		<img src="logo.png" class="logo">
-		<span onclick="openMenu()" class="menu">&#9776;</span>
-        <div id="myNav" class="overlay">
-            <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
-            <div class="ContenutoMenu">
-                <a href="#">Home</a>
-                <a href="#">Segreteria</a>
-                <a href="logout.jsp"> logout</a>
-            </div>
-            <div id="blocco" class="blocco">
-        	</div>
-        </div>
-	</header>
-	<body id="body">
+	<body style="background: linear-gradient(to top right, #808080 0%, #d3d3d3 45%);height:90vh;background-repeat: no-repeat;">
 		<%
 		String matricola = (String) session.getAttribute("matricola");
 		String nome_alunno = (String) session.getAttribute("nome");
@@ -39,6 +26,21 @@
 		String materia2 = (String) request.getAttribute("materia2");
 		%>
 		<%if (matricola == null) {response.sendRedirect("index.jsp");}%>
+		
+		<header>
+			<img src="logo.png" class="logo">
+			<span onclick="openMenu()" class="menu">&#9776;</span>
+	        <div id="myNav" class="overlay">
+	            <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
+	            <div class="ContenutoMenu">
+	                <a href="#">Home</a>
+	                <a href="ticket.jsp">Ticket</a>
+	                <a href="logout.jsp"> logout</a>
+	            </div>
+	            <div id="blocco" class="blocco">
+	        	</div>
+	        </div>
+		</header>
 		
 		<h2 style="text-align:center;padding-top:1%">Benvenuto <%=nome_alunno%> <%=cognome_alunno%></h2>
 		
@@ -92,10 +94,18 @@
 	        <p><%=messaggio%></p>
 		<%} else {%><%} %>
 		<% if (materia2 != null && data != null) {%>
-	        <p>Prenotazione effettuata con successo in data <b><%=data%></b> per il corso <b><%=materia2%></b></p>
+	        <p id="messaggio_prenotazione" style="text-align:center;">Prenotazione effettuata con successo in data <b><%=data%></b> per il corso <b><%=materia2%></b></p>
+	   		<a href="javascript: window.history.go(-2)">
+	   			<lord-icon
+				    src="https://cdn.lordicon.com/zmkotitn.json";
+				    trigger="hover";
+				    colors="primary:#121331";
+				    style="width:50px;height:50px;transform: scaleX(-1);margin-top:10%">
+				</lord-icon>
+	   		</a>
 	    <%} else {%><%}%>
+	    <footer>
+        	<p>&copy; Università  degli Studi di Napoli Federico II</p>
+  		</footer>
 	</body>
-	<footer>
-        <p>&copy; Università  degli Studi di Napoli Federico II</p>
-  	</footer>
 </html>

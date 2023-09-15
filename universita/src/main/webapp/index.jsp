@@ -15,6 +15,7 @@
 	<body>
 		<img src="background1.jpg" class="background">
 		
+		
 		<div class="form">
 			<form action="login" method="post">
 				<h2>Login</h2>
@@ -39,6 +40,9 @@
 				<button type="submit" value="Accedi" id="submit">Accedi</button>
 			</form>
 		</div>
+		<footer>
+        	<p>&copy; Università  degli Studi di Napoli Federico II</p>
+  		</footer>
 	</body>
 	<script src="./obbligo_accesso.js"></script>
 </html>

@@ -11,20 +11,8 @@
 		<link rel="stylesheet" href="menu.css">
 		<title>Area Professori</title>
 	</head>
-	<header>
-		<img src="logo.png" class="logo">
-		<span onclick="openMenu()" class="menu">&#9776;</span>
-		<div id="myNav" class="overlay">
-		    <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
-           	<div class="ContenutoMenu">
-               <a href="#">Home</a>
-               <a href="#">Segreteria</a>
-               <a href="logout.jsp"> logout</a>
-           	</div>
-           	<div id="blocco" class="blocco"></div>
-       </div>
-	</header>
-    <body>
+	
+    <body style="background: linear-gradient(to top right, #808080 0%, #d3d3d3 45%);height:90vh;background-repeat: no-repeat;">
 	    <section>
 	        <% String nome=(String)session.getAttribute("nome"); String
 			cognome=(String)session.getAttribute("cognome"); String
@@ -34,9 +22,21 @@
 			nomeMateria=(String)request.getAttribute("Materia"); String
 			Data=(String)request.getAttribute("Data"); %>
 			<% if(nome==null && cognome==null){ response.sendRedirect("index.jsp"); } %>
+			
+			<header>
+				<img src="logo.png" class="logo">
+				<span onclick="openMenu()" class="menu">&#9776;</span>
+				<div id="myNav" class="overlay">
+				    <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
+		           	<div class="ContenutoMenu">
+		               <a href="#">Home</a>
+		               <a href="ticket.jsp">Ticket</a>
+		               <a href="logout.jsp"> logout</a>
+		           	</div>
+		           	<div id="blocco" class="blocco"></div>
+		       </div>
+			</header>
 			<h1 style="text-align:center">Bentornato <%=nome%> <%=cognome%> !</h1>
-	
-	
 	        <form action="StampaStudenti" method="post">
 	            <% if(appelli!=null){ %>
 					<p class="pclass"> Per la sua materia: <%=materia %> sono disponibili i seguenti appelli </p>
@@ -78,8 +78,8 @@
 				</div>
 			<%} %>
 	    </section>
+	    <footer>
+        	<p>&copy; Università  degli Studi di Napoli Federico II</p>
+  		</footer>
 	</body>
-	<footer>
-        <p>&copy; Università  degli Studi di Napoli Federico II</p>
-  	</footer>
 </html>
