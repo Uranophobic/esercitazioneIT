@@ -1,4 +1,4 @@
-package mypackage;
+package control;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import implement.DataFormato;
 
 
 /**
@@ -44,9 +45,10 @@ public class StampaStudenti extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String idAppello= request.getParameter("ID_appello");
-		Connection conn=Connessione.getCon();
+		Connection conn=null;
 
 		try {
+			conn = Connessione.getInstance().getConnection();
 			/*PreparedStatement smt1=conn.prepareStatement("select stud_prenotato from prenotazione where app_prenotato=CAST(? AS UNSIGNED INTEGER)");
 			smt1.setString(1, idAppello);
 			ResultSet rs1=smt1.executeQuery();
@@ -59,27 +61,26 @@ public class StampaStudenti extends HttpServlet {
 			ResultSet rs=smt.executeQuery();
 			rs.next();
 			String Materia= rs.getString("Materia");
-			String Data= rs.getString("Data");
-			PreparedStatement smt2= conn.prepareStatement("select Materia from corso where idcorso=CAST(? AS UNSIGNED INTEGER)");
-			smt2.setString(1, Materia);
+			String Data1= rs.getString("Data");
+			DataFormato Data= new DataFormato();
+			
+			
+			PreparedStatement smt2= conn.prepareStatement("select materia from lezione where materia='"+Materia+"'");
+		//	smt2.setString(1, Materia);
 			ResultSet rs2= smt2.executeQuery();
 			rs2.next();
 			String nomeMateria= rs2.getString(1);
-			PreparedStatement smt1= conn.prepareStatement("select nome,cognome,Matricola from studente join (appello join prenotazione on CAST(? AS UNSIGNED INTEGER)=app_prenotato) on Matricola=stud_prenotato");
+			PreparedStatement smt1= conn.prepareStatement("select nome,cognome,Matricola from studente join (appello join prenotazione on CAST(? AS UNSIGNED INTEGER)=id_app) on Matricola=matricola_stud");
 			smt1.setString(1, idAppello);
 			ResultSet rs1=smt1.executeQuery();
 			RequestDispatcher rd= request.getRequestDispatcher("professore.jsp");
 			request.setAttribute("Materia",nomeMateria);
-			request.setAttribute("Data",Data);
+			request.setAttribute("Data",Data.dataIngToIta(Data1));
 			request.setAttribute("elenco_studenti", rs1);
 			rd.forward(request, response);
 
 
-
-
-
-
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 
 			e.printStackTrace();
 		}
