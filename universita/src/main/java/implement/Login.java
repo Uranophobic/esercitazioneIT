@@ -24,7 +24,7 @@ public class Login {
 			
 			while (rs.next()) {
 				if (rs.getString("username").equals(username)&& rs.getString("password").equals(password)) {
-					PreparedStatement smt1 = conn.prepareStatement("select matricola from studente where username=?");
+					PreparedStatement smt1 = conn.prepareStatement("select * from studente where username=?");
 					smt1.setString(1, username); // abbiamo chiesto la stringa relativa all' username e password
 					rsr = smt1.executeQuery(); // restituisce la collection contenente la matricola
 				}
