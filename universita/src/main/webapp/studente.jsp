@@ -29,6 +29,8 @@
 	<body id="body">
 		<%
 		String matricola = (String) session.getAttribute("matricola");
+		String nome_alunno = (String) session.getAttribute("nome");
+		String cognome_alunno = (String) session.getAttribute("cognome");
 		ResultSet res = (ResultSet) request.getAttribute("tabella_corso");
 		ResultSet res1 = (ResultSet) request.getAttribute("elenco_appelli");
 		String materia = (String) request.getAttribute("materia");
@@ -38,7 +40,7 @@
 		%>
 		<%if (matricola == null) {response.sendRedirect("index.jsp");}%>
 		
-		<h2 style="text-align:center;padding-top:1%">Benvenuto <%=matricola%></h2>
+		<h2 style="text-align:center;padding-top:1%">Benvenuto <%=nome_alunno%> <%=cognome_alunno%></h2>
 		
 		<%if (res != null) {%>
 			<p style="text-align: center;">Inserisci la prenotazione che vuoi effettuare:</p>
