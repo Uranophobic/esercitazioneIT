@@ -89,6 +89,7 @@
 		<%if (messaggio != null){%>
 	        <p><%=messaggio%></p>
 		<%} else {%><%} %>
+		
 		<% if (materia2 != null && data != null) {%>
 	        <p>Prenotazione effettuata con successo in data <b><%=data%></b> per il corso <b><%=materia2%></b></p>
 	    <%} else {%><%}%>

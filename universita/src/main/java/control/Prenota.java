@@ -54,6 +54,7 @@ public class Prenota extends HttpServlet {
 			int idmatri = Integer.parseInt(matricola);
 			int idappel = Integer.parseInt(appello);
 			int idpr = Integer.parseInt(idprof);
+			
 			prenotazione.inserire(idpr, idappel, idmatri);
 
 			ResultSet data = appello1.ricerca(idappel);
