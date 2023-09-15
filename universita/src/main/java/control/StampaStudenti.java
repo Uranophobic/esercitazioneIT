@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import implement.DataFormato;
+import implement.Query;
 
 
 /**
@@ -22,6 +23,7 @@ import implement.DataFormato;
 @WebServlet("/StampaStudenti")
 public class StampaStudenti extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	Query query = new Query();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -43,7 +45,7 @@ public class StampaStudenti extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	
 		String idAppello= request.getParameter("ID_appello");
 		Connection conn=null;
 
@@ -70,9 +72,12 @@ public class StampaStudenti extends HttpServlet {
 			ResultSet rs2= smt2.executeQuery();
 			rs2.next();
 			String nomeMateria= rs2.getString(1);
-			PreparedStatement smt1= conn.prepareStatement("select nome,cognome,Matricola from studente join (appello join prenotazione on CAST(? AS UNSIGNED INTEGER)=id_app) on Matricola=matricola_stud");
-			smt1.setString(1, idAppello);
-			ResultSet rs1=smt1.executeQuery();
+			
+//			PreparedStatement smt1= conn.prepareStatement("select nome,cognome,Matricola from studente join (appello join prenotazione on CAST(? AS UNSIGNED INTEGER)=id_app) on Matricola=matricola_stud");
+//			smt1.setString(1, idAppello);
+//			ResultSet rs1=smt1.executeQuery();
+			
+			ResultSet rs1= query.getResult("select distinct nome,cognome,Matricola from studente join (appello join prenotazione on CAST("+idAppello+" AS UNSIGNED INTEGER)=id_app) on Matricola=matricola_stud");
 			RequestDispatcher rd= request.getRequestDispatcher("professore.jsp");
 			request.setAttribute("Materia",nomeMateria);
 			request.setAttribute("Data",Data.dataIngToIta(Data1));

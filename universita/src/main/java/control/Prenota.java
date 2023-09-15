@@ -71,6 +71,7 @@ public class Prenota extends HttpServlet {
 			materia.next();
 			String nomeMateria=materia.getString(1);
 			RequestDispatcher rd1=request.getRequestDispatcher("studente.jsp");
+			
 			request.setAttribute("data", dataScelta);
 			request.setAttribute("materia2", nomeMateria);
 			rd1.forward(request, response);
