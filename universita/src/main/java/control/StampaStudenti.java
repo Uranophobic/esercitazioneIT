@@ -1,8 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import implement.Appello;
 import implement.DataFormato;
-import implement.Lezione;
 import implement.Query;
 
 /**
@@ -26,7 +23,7 @@ public class StampaStudenti extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Query query = new Query();
 	private Appello appello = new Appello();
-	private Lezione lezione = new Lezione();
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -54,7 +51,7 @@ public class StampaStudenti extends HttpServlet {
 			throws ServletException, IOException {
 
 		String idAppello = request.getParameter("ID_appello");
-		Connection conn = null;
+		
 		int id = Integer.parseInt(idAppello);
 
 		try {

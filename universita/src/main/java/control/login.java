@@ -14,35 +14,21 @@ import javax.servlet.http.HttpSession;
 
 import implement.Login;
 
-/**
- * Servlet implementation class login
- */
 @WebServlet("/login")
 public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public login() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -56,34 +42,33 @@ public class login extends HttpServlet {
 			HttpSession session;
 
 			if (lo.prof(username, password) != null) {
-				
+
 				session = request.getSession(true);
 				ResultSet rs4 = lo.prof(username, password);
 				rs4.next();
 
 				String nome = rs4.getString("nome");
 				String cognome = rs4.getString("cognome");
-				int  idProfessore = rs4.getInt("idProfessore");
-				
-				ResultSet rs5 =lo.corso(idProfessore);
+				int idProfessore = rs4.getInt("idProfessore");
+
+				ResultSet rs5 = lo.corso(idProfessore);
 				rs5.next();
-				
+
 				String lezionemateria = rs5.getString("materia");
-			
+
 				ResultSet appelli = lo.appelli(lezionemateria);
-				
-				
+
 				session.setAttribute("nome", nome);
 				session.setAttribute("cognome", cognome);
 				RequestDispatcher rd4 = request.getRequestDispatcher("professore.jsp");
 				session.setAttribute("materia", lezionemateria);
 				request.setAttribute("appelli", appelli);
 				rd4.forward(request, response);
-				
+
 			} else if (lo.student(username, password) != null) {
-				
+
 				lo.tabella();
-				ResultSet rs= lo.student(username, password);
+				ResultSet rs = lo.student(username, password);
 				rs.next();
 				String matricola = rs.getString(1);
 				String nome = rs.getString("nome");
@@ -97,7 +82,7 @@ public class login extends HttpServlet {
 																						// tabella dei corsi disponibili
 				request.setAttribute("tabella_corso", lo.tabella());
 				rd.forward(request, response);
-				
+
 			} else {
 
 				// ci vuole un controllo
@@ -107,8 +92,6 @@ public class login extends HttpServlet {
 				rd3.forward(request, response);
 
 			}
-	
-
 
 		} catch (SQLException e) {
 
