@@ -62,22 +62,22 @@
 								<div class="screen-body-item">
 									<div class="app-form">
 										<div class="app-form-group">
-											<input class="app-form-control" placeholder="MATRICOLA"
+											<input type="text" class="app-form-control" name="matricola" placeholder="MATRICOLA"
 												value="<%=matricola%>">
 										</div>
 										<div class="app-form-group">
-											<input class="app-form-control" placeholder="NOME" value="<%=cognome_alunno%>">
+											<input type="text" class="app-form-control" placeholder="NOME" name="nome" value="<%=cognome_alunno%>">
 										</div>
 										<div class="app-form-group message">
-											<input class="app-form-control" placeholder="TITOLO">
+											<input  type="text"class="app-form-control" placeholder="TITOLO" name="titolo" >
 										</div>
 		
 										<div class="app-form-group message">
-											<input class="app-form-control" placeholder="MESSAGGIO">
+											<input type="text" class="app-form-control" placeholder="MESSAGGIO" name="messaggio">
 										</div>
 										<div class="app-form-group buttons">
 		
-											<button class="app-form-button" button type="submit" value="">INVIA</button>
+											<button class="app-form-button" button type="submit">INVIA</button>
 										</div>
 									</div>
 								</div>
@@ -97,7 +97,7 @@
 		<% }%> 
 		 --%>
 		<footer>
-			<p>&copy; Universitï¿½ degli Studi di Napoli Federico II</p>
+			<p>&copy; Università degli Studi di Napoli Federico II</p>
 		</footer>
 	</body>
 </html>
