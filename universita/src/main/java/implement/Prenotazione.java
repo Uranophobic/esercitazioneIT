@@ -12,29 +12,22 @@ public class Prenotazione {
 	private Connection con = null;
 
 	// non mettere la primary-key nell'inserimento
-	public void inserire( int id_app, int matricola_stud) {
-		
-		
+	public void inserire(int id_app, int matricola_stud) {
+
 		String query = "INSERT INTO prenotazione( id_app, matricola_stud) values(?,?)";
-		ResultSet r = lista();
+
 		try {
-		while (r.next()) {
-			if (r.getString("id_app").equals(id_app) && r.getString("matricola_stud").equals(matricola_stud)) {
-			
-					con = Connessione.getInstance().getConnection();
-					PreparedStatement pst = con.prepareStatement(query);
-					
-					pst.setInt(1, id_app);
-					pst.setInt(2, matricola_stud);
-					pst.executeUpdate() ;
-				
+			con = Connessione.getInstance().getConnection();
+			PreparedStatement pst = con.prepareStatement(query);
+
+			pst.setInt(1, id_app);
+			pst.setInt(2, matricola_stud);
+			pst.executeUpdate();
+
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
 		}
-		} 
-	}catch (SQLException | ClassNotFoundException e) {
-		System.out.println(e.getMessage());
-	}
-		
-		
+
 	}
 
 	// non fare set per primary-key
