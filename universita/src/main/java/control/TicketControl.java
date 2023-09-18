@@ -72,10 +72,14 @@ public class TicketControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		String matricola =request.getParameter("matricola");
 		
+		String titolo = request.getParameter("titolo");
+		String messagio = request.getParameter("messagio");
+		int matricolaint = Integer.getInteger(matricola);
 		
-		// con resultset abbiamo preso la
-																				// tabella dei corsi disponibili
+		ticket.inserire(matricolaint, titolo, messagio);
+		
 		
 		
 	}
