@@ -12,20 +12,20 @@ public class Prenotazione {
 	private Connection con = null;
 
 	// non mettere la primary-key nell'inserimento
-	public void inserire(int id_prof, int id_app, int matricola_stud) {
+	public void inserire( int id_app, int matricola_stud) {
 		
 		
-		String query = "INSERT INTO prenotazione(id_prof, id_app, matricola_stud) values(?,?,?)";
+		String query = "INSERT INTO prenotazione( id_app, matricola_stud) values(?,?)";
 		ResultSet r = lista();
 		try {
 		while (r.next()) {
-			if (r.getString("id_prof").equals(id_prof) && r.getString("id_app").equals(id_app) && r.getString("matricola_stud").equals(matricola_stud)) {
+			if (r.getString("id_app").equals(id_app) && r.getString("matricola_stud").equals(matricola_stud)) {
 			
 					con = Connessione.getInstance().getConnection();
 					PreparedStatement pst = con.prepareStatement(query);
-					pst.setInt(1, id_prof);
-					pst.setInt(2, id_app);
-					pst.setInt(3, matricola_stud);
+					
+					pst.setInt(1, id_app);
+					pst.setInt(2, matricola_stud);
 					pst.executeUpdate() ;
 				
 		}
