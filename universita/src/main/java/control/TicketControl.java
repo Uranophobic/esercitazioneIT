@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import implement.Login;
 import implement.Studente;
 import implement.Ticket;
 
@@ -18,21 +19,21 @@ import implement.Ticket;
 @WebServlet("/ApriTicket")
 public class TicketControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       private Studente studente = new Studente();
-       private Ticket ticket = new Ticket();
-       private String matricola1 = "";
-   
-    public TicketControl() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private Studente studente = new Studente();
+	private Ticket ticket = new Ticket();
+	private String matricola1 = "";
 
-	
+	public TicketControl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session;
 		matricola1 =  request.getParameter("matricola");
-		
+
 		try {
 			ResultSet rs = studente.ricerca(matricola1);
 			rs.next();
@@ -44,45 +45,49 @@ public class TicketControl extends HttpServlet {
 			rs = ticket.lista();
 			System.out.println();
 			while(rs.next()) {
-				
+
 				if (rs.getString("idstud").equals(matricola)) {
 					idtickect=rs.getString("idticket");
 					richiesta=rs.getString("richiesta");
-					
+
 				}
 			}
-			rs = ticket.lista();
+
 			session = request.getSession(true); // se la sessione esiste(esiste l'oggetto session) altrimenti ti
-												// crea un oggetto di tipo HttpSession
+			// crea un oggetto di tipo HttpSession
 			session.setAttribute("matricola", matricola);
 			session.setAttribute("nome", nome);
 			session.setAttribute("cognome", cognome);
 			session.setAttribute("richiesta", richiesta);
 			session.setAttribute("idticket", idtickect);
-			session.setAttribute("tabellaticket", rs);
 			RequestDispatcher rd = request.getRequestDispatcher("ticket.jsp"); 
 			rd.forward(request, response);
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		HttpSession session;
+		session = request.getSession(true);
+		Login lo = new Login();
 		String matricola =request.getParameter("matricola");
+		System.out.println(matricola);
+
 		String titolo = request.getParameter("titolo");
-		String messagio = request.getParameter("messagio");
-		
+		String messaggio = request.getParameter("messaggio");
 		int matricolaint = Integer.parseInt(matricola);
-		
-		ticket.inserire(matricolaint, titolo, messagio);
-		
-		
-		
+
+		ticket.inserire(matricolaint, titolo, messaggio);
+		session.setAttribute("tabella_corso", lo.tabella());
+
+		RequestDispatcher rd = request.getRequestDispatcher("studente.jsp");
+		rd.forward(request, response);
+
 	}
+
 
 }

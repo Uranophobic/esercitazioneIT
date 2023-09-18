@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="studente.css">
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="menu.css">
+		<link rel="stylesheet" href="ticket.css">
 		<script src="menu.js"defear></script>
 	</head>
 	<body>
@@ -61,19 +62,22 @@
 								<div class="screen-body-item">
 									<div class="app-form">
 										<div class="app-form-group">
-											<input class="app-form-control" placeholder="MATRICOLA"
-												value="">
+											<input type="text" class="app-form-control" name="matricola" placeholder="MATRICOLA"
+												value="<%=matricola%>">
 										</div>
 										<div class="app-form-group">
-											<input class="app-form-control" placeholder="NAME" value="">
+											<input type="text" class="app-form-control" placeholder="NOME" name="nome" value="<%=cognome_alunno%>">
+										</div>
+										<div class="app-form-group message">
+											<input  type="text"class="app-form-control" placeholder="TITOLO" name="titolo" >
 										</div>
 		
 										<div class="app-form-group message">
-											<input class="app-form-control" placeholder="MESSAGE">
+											<input type="text" class="app-form-control" placeholder="MESSAGGIO" name="messaggio">
 										</div>
 										<div class="app-form-group buttons">
 		
-											<button class="app-form-button" button type="submit" value="">INVIA</button>
+											<button class="app-form-button" button type="submit">INVIA</button>
 										</div>
 									</div>
 								</div>
@@ -86,14 +90,14 @@
 		<% }%>
 	
 		<%-- 
-		<% if(idticket!=null){ %>
+		<% if(idticket!=null && chiuso==true){ %>
 		<form action="Mostraticket" method="post">
 			<button type="submit" value="Stampa">Mostra ticket aperti</button>
 		</form>
 		<% }%> 
 		 --%>
 		<footer>
-			<p>&copy; Università  degli Studi di Napoli Federico II</p>
+			<p>&copy; Università degli Studi di Napoli Federico II</p>
 		</footer>
 	</body>
 </html>

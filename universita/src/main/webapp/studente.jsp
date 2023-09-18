@@ -18,7 +18,7 @@
 		String matricola = (String) session.getAttribute("matricola");
 		String nome_alunno = (String) session.getAttribute("nome");
 		String cognome_alunno = (String) session.getAttribute("cognome");
-		ResultSet res = (ResultSet) request.getAttribute("tabella_corso");
+		ResultSet res = (ResultSet) session.getAttribute("tabella_corso");
 		ResultSet res1 = (ResultSet) request.getAttribute("elenco_appelli");
 		String materia = (String) request.getAttribute("materia");
 		String messaggio = (String) request.getAttribute("successo");
@@ -34,7 +34,7 @@
 	            <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 	            <div class="ContenutoMenu">
 	                <a href="#">Home</a>
-	                <a href="ticket.jsp">Ticket</a>
+	                <a href="ApriTicket?matricola=<%=matricola%>" > Ticket</a>
 	                <a href="logout.jsp"> logout</a>
 	            </div>
 	            <div id="blocco" class="blocco">
