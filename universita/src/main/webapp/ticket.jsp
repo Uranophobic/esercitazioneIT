@@ -71,8 +71,7 @@
 										</div>
 		
 										<div class="app-form-group message">
-											<p id="scritta" style="position:absolute; z-index:-1">Messaggio</p>
-											<input onclick="Up()" type="text" class="app-form-control" name="messaggio" id="messaggio" required title="Il messaggio è obbligatorio">
+											<input type="text" class="app-form-control" placeholder="MESSAGGIO" name="messaggio" id="messaggio" required title="Il messaggio è obbligatorio">
 										</div>
 										<div class="app-form-group buttons">
 		

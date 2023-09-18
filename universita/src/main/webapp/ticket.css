@@ -154,6 +154,17 @@
     transition: border-color .2s;
   }
   
+  .scritta{
+	  overflow: hidden;
+	  position:absolute; 
+	  bottom:145px;
+	  cursor: text;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  }
+  
   .app-form-control::placeholder {
     color: black;
   }

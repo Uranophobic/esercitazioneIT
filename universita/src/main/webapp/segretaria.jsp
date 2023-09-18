@@ -19,6 +19,7 @@
 			materia=(String)session.getAttribute("materia"); ResultSet
 			appelli=(ResultSet)request.getAttribute("appelli"); ResultSet
 			elenco=(ResultSet)request.getAttribute("elenco_studenti"); String
+			ResultSet res = (ResultSet) session.getAttribute("tabella_ticket");
 			nomeMateria=(String)request.getAttribute("Materia"); String
 			Data=(String)request.getAttribute("Data"); %>
 			<% if(nome==null && cognome==null){ response.sendRedirect("index.jsp"); } %>
@@ -30,54 +31,31 @@
 				    <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 		           	<div class="ContenutoMenu">
 		               <a href="#">Home</a>
-		               
 		               <a href="logout.jsp"> logout</a>
 		           	</div>
 		           	<div id="blocco" class="blocco"></div>
 		       </div>
 			</header>
 			<h1 style="text-align:center">Bentornato <%=nome%> <%=cognome%> !</h1>
-			<form action="StampaTicket" method="post"> <!-- apertura per visualizzare i ticket presenti -->
-			 <% if(appelli!=null){ %>
-					<p class="pclass"> Sono presenti i seguenti ticket <%=materia %></p>
-					<table>
-					    <tr>
-					        <th></th>
-					        <th>ID Appello</th>
-					        <th>Data</th>
-					    </tr>
-					    
-					    <% while(appelli.next()){ %>
-							<tr>
-								<td><input type="radio" name="ID_appello" value=<%=appelli.getInt(1)%>></td>
-								<td><%=appelli.getInt(1)%></td>
-								<td><%=appelli.getDate("Data") %></td>
-							</tr>
-							</table>
-							<button type="submit" value="Stampa" class="bottoneP">Vai</button>
-						<% }%>  
-				<% }%>
-			</form>
-			<% if(elenco!=null){%>
-				<div class="div_table">
-				<p>Per l'esame <b><%=nomeMateria %></b> in data <b><%=Data %></b> si sono prenotati i seguenti studenti: </p>
-					<table>
-					    <tr>
-					        <th>Nome</th>
-					        <th>Cognome</th>
-					        <th>Matricola</th>
-					    </tr>
-					    <% while(elenco.next()){ %>
-							<tr>
-							    <td><%=elenco.getString("nome")%></td>
-								<td><%=elenco.getString("cognome")%></td>
-								<td><%=elenco.getString("Matricola") %></td>
-							</tr>
-						<% }%>
-					</table>
-				</div>
-			<%} %>
-	        
+<!-- 			<form action="Prenotazione" method="post"> -->
+				<table>
+					<tr>
+						<th></th>
+						<th>ID ticket</th>
+						<th>Titolo</th>
+						<th>Stato</th>
+					</tr>
+					<%while(res.next()){%>
+						<tr>
+							<td><input type="radio" id="Scelta" name="materia" value=<%=res.getInt("idcorso")%>></td>
+							<td><%=res.getInt("idcorso")%></td>
+							<td><%=res.getString("materia")%></td>
+							<td><%=res.getString("cognome")%> <%=res.getString("nome")%></td>
+						</tr>
+					<%}%>
+				</table>
+				<button type="submit" value="Prenota" class="bottoneP">Prenota</button>
+<!-- 			</form> -->
 	    </section>
 	    <footer>
         	<p>&copy; Università  degli Studi di Napoli Federico II</p>
