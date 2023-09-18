@@ -59,7 +59,7 @@ public class TicketControl extends HttpServlet {
 			session.setAttribute("nome", nome);
 			session.setAttribute("cognome", cognome);
 			session.setAttribute("richiesta", richiesta);
-			session.setAttribute("idticket", idtickect);
+			request.setAttribute("idticket", idtickect);
 			RequestDispatcher rd = request.getRequestDispatcher("ticket.jsp"); 
 			rd.forward(request, response);
 
@@ -71,8 +71,8 @@ public class TicketControl extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session;
-		session = request.getSession(true);
+		
+		
 		Login lo = new Login();
 		String matricola =request.getParameter("matricola");
 		System.out.println(matricola);
@@ -82,7 +82,7 @@ public class TicketControl extends HttpServlet {
 		int matricolaint = Integer.parseInt(matricola);
 
 		ticket.inserire(matricolaint, titolo, messaggio);
-		session.setAttribute("tabella_corso", lo.tabella());
+		request.setAttribute("tabella_corso", lo.tabella());
 
 		RequestDispatcher rd = request.getRequestDispatcher("studente.jsp");
 		rd.forward(request, response);

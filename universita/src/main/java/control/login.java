@@ -78,7 +78,7 @@ public class login extends HttpServlet {
 				session.setAttribute("matricola", matricola);
 				session.setAttribute("nome", nome);
 				session.setAttribute("cognome", cognome);
-				session.setAttribute("tabella_corso", lo.tabella());
+				request.setAttribute("tabella_corso", lo.tabella());
 				RequestDispatcher rd = request.getRequestDispatcher("studente.jsp"); // con resultset abbiamo preso la
 																						// tabella dei corsi disponibili
 				

@@ -70,11 +70,11 @@ public class StampaStudenti extends HttpServlet {
 			ResultSet rs2 = query.getResult("select materia from lezione where materia='" + Materia + "'");
 			rs2.next();
 			String nomeMateria = rs2.getString(1);
-
-			RequestDispatcher rd = request.getRequestDispatcher("professore.jsp");
 			request.setAttribute("Materia", nomeMateria);
 			request.setAttribute("Data", Data.dataIngToIta(Data1));
 			request.setAttribute("elenco_studenti", rs1);
+			RequestDispatcher rd = request.getRequestDispatcher("professore.jsp");
+			
 			rd.forward(request, response);
 
 		} catch (SQLException e) {

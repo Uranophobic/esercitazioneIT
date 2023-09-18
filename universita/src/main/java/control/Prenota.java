@@ -50,7 +50,7 @@ public class Prenota extends HttpServlet {
 			int idmatri = Integer.parseInt(matricola);
 			int idappel = Integer.parseInt(appello);
 			
-			
+			System.out.println("I'm here");
 			prenotazione.inserire( idappel, idmatri);
 
 			ResultSet data = appello1.ricerca(idappel);
