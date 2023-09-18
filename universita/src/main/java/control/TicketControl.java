@@ -51,7 +51,7 @@ public class TicketControl extends HttpServlet {
 					
 				}
 			}
-			
+			rs = ticket.lista();
 			session = request.getSession(true); // se la sessione esiste(esiste l'oggetto session) altrimenti ti
 												// crea un oggetto di tipo HttpSession
 			session.setAttribute("matricola", matricola);
@@ -59,6 +59,7 @@ public class TicketControl extends HttpServlet {
 			session.setAttribute("cognome", cognome);
 			session.setAttribute("richiesta", richiesta);
 			session.setAttribute("idticket", idtickect);
+			session.setAttribute("tabellaticket", rs);
 			RequestDispatcher rd = request.getRequestDispatcher("ticket.jsp"); 
 			rd.forward(request, response);
 			
@@ -73,10 +74,10 @@ public class TicketControl extends HttpServlet {
 		
 		
 		String matricola =request.getParameter("matricola");
-		
 		String titolo = request.getParameter("titolo");
 		String messagio = request.getParameter("messagio");
-		int matricolaint = Integer.getInteger(matricola);
+		
+		int matricolaint = Integer.parseInt(matricola);
 		
 		ticket.inserire(matricolaint, titolo, messagio);
 		
