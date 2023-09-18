@@ -45,17 +45,13 @@ public class Prenota extends HttpServlet {
 
 		try {
 
-			ResultSet rs2 = query.getResult(
-					"SELECT id_prof FROM  materia  WHERE nome_materia = ( SELECT materia FROM appello WHERE idappello='"
-							+ appello + "' )");
-			rs2.next();
-			String idprof = rs2.getString(1);
+			
 
 			int idmatri = Integer.parseInt(matricola);
 			int idappel = Integer.parseInt(appello);
-			int idpr = Integer.parseInt(idprof);
 			
-			prenotazione.inserire(idpr, idappel, idmatri);
+			
+			prenotazione.inserire( idappel, idmatri);
 
 			ResultSet data = appello1.ricerca(idappel);
 			data.next();
