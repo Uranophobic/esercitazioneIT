@@ -19,7 +19,7 @@
 			materia=(String)session.getAttribute("materia"); ResultSet
 			appelli=(ResultSet)request.getAttribute("appelli"); ResultSet
 			elenco=(ResultSet)request.getAttribute("elenco_studenti"); String
-			ResultSet res = (ResultSet) session.getAttribute("tabella_ticket");
+
 			nomeMateria=(String)request.getAttribute("Materia"); String
 			Data=(String)request.getAttribute("Data"); %>
 			<% if(nome==null && cognome==null){ response.sendRedirect("index.jsp"); } %>
@@ -45,16 +45,8 @@
 						<th>Titolo</th>
 						<th>Stato</th>
 					</tr>
-					<%while(res.next()){%>
-						<tr>
-							<td><input type="radio" id="Scelta" name="materia" value=<%=res.getInt("idcorso")%>></td>
-							<td><%=res.getInt("idcorso")%></td>
-							<td><%=res.getString("materia")%></td>
-							<td><%=res.getString("cognome")%> <%=res.getString("nome")%></td>
-						</tr>
-					<%}%>
+					
 				</table>
-				<button type="submit" value="Prenota" class="bottoneP">Prenota</button>
 <!-- 			</form> -->
 	    </section>
 	    <footer>

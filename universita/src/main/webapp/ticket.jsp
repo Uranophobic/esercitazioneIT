@@ -66,16 +66,19 @@
 										<div class="app-form-group">
 											<p class="app-form-control" name="nome"><%=nome_alunno%> <%=cognome_alunno%></p>
 										</div>
-										<div class="app-form-group message">
-											<input  type="text"class="app-form-control" placeholder="TITOLO" name="titolo" id="titolo" required title="Il titolo è obbligatorio">
+										
+										<div class="form-group">
+											<input class="app-form-control" placeholder=" " required title="Il titolo è obbligatorio">
+											<label class="form-label">TITOLO</label>
 										</div>
-		
-										<div class="app-form-group message">
-											<input type="text" class="app-form-control" placeholder="MESSAGGIO" name="messaggio" id="messaggio" required title="Il messaggio è obbligatorio">
+										
+										<div class="form-group">
+											<input class="app-form-control" placeholder=" " required title="Il messaggio è obbligatorio">
+											<label class="form-label">MESSAGGIO</labe>
 										</div>
+
 										<div class="app-form-group buttons">
-		
-											<button class="app-form-button" type="submit" id="submit">INVIA</button>
+											<button style="width:100%; margin:0" type="submit" id="submit">INVIA</button>
 										</div>
 									</div>
 								</div>

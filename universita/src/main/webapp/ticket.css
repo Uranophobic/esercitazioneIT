@@ -1,11 +1,3 @@
-*, *:before, *:after {
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
- 
-  
   body, button, input {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
@@ -14,7 +6,6 @@
   
   .background {
     display: flex;
-    min-height: 100vh;
   }
   
   .container {
@@ -129,7 +120,6 @@
   
   .app-form-group {
     margin-bottom: 15px;
-    
   }
   
   .app-form-group.message {
@@ -138,12 +128,11 @@
   
   .app-form-group.buttons {
     margin-bottom: 0;
-    text-align: right;
+    text-align: center;
   }
   
   .app-form-control {
-    width: 100%;
-    padding: 10px 0;
+	width: 92%;
     background: none;
     border: none;
     border-bottom: 1px solid #666;
@@ -152,17 +141,7 @@
     text-transform: uppercase;
     outline: none;
     transition: border-color .2s;
-  }
-  
-  .scritta{
-	  overflow: hidden;
-	  position:absolute; 
-	  bottom:145px;
-	  cursor: text;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    padding: 12px 0px 12px 12px;
   }
   
   .app-form-control::placeholder {
@@ -272,3 +251,39 @@
         max-width: 100%;
     }
 }
+
+
+
+
+
+/* Animazione Scritta */
+
+.form-group {
+	width: 100%;
+    margin: 20px 0;
+    position: relative;
+    display: inline-block;
+}
+  
+.form-label {
+    padding: 12px;
+    pointer-events: none;
+    position:absolute;
+    left:0;
+    top:0;
+    transition: 0.2s;
+    transition-timing-function: ease;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+input:focus + label, input:not(:placeholder-shown) + label {
+    opacity:1;
+    transform: scale(0.75) translateY(-100%) translateX(-30px);
+}
+
+input:focus + label, input:not(:-ms-input-placeholder) + label {
+    opacity:1;
+    transform: scale(0.75) translateY(-100%) translateX(-30px);
+}
+
+/* Fine animazione */
