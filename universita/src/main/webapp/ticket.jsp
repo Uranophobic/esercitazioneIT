@@ -8,7 +8,6 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Sezione Ticket</title>
-		<link rel="stylesheet" href="studente.css">
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="menu.css">
 		<link rel="stylesheet" href="ticket.css">
@@ -55,29 +54,29 @@
 							<div class="screen-body">
 								<div class="screen-body-item left">
 									<div class="app-title">
-										<span>APRI UN</span> <span>TICKET</span>
+										<p>APRI UN TICKET</p>
 									</div>
 		
 								</div>
 								<div class="screen-body-item">
 									<div class="app-form">
 										<div class="app-form-group">
-											<input type="text" class="app-form-control" name="matricola" placeholder="MATRICOLA"
-												value="<%=matricola%>">
+											<p class="app-form-control" name="matricola"><%=matricola%></p>
 										</div>
 										<div class="app-form-group">
-											<input type="text" class="app-form-control" placeholder="NOME" name="nome" value="<%=cognome_alunno%>">
+											<p class="app-form-control" name="nome"><%=nome_alunno%> <%=cognome_alunno%></p>
 										</div>
 										<div class="app-form-group message">
-											<input  type="text"class="app-form-control" placeholder="TITOLO" name="titolo" >
+											<input  type="text"class="app-form-control" placeholder="TITOLO" name="titolo" id="titolo" required title="Il titolo è obbligatorio">
 										</div>
 		
 										<div class="app-form-group message">
-											<input type="text" class="app-form-control" placeholder="MESSAGGIO" name="messaggio">
+											<p id="scritta" style="position:absolute; z-index:-1">Messaggio</p>
+											<input onclick="Up()" type="text" class="app-form-control" name="messaggio" id="messaggio" required title="Il messaggio è obbligatorio">
 										</div>
 										<div class="app-form-group buttons">
 		
-											<button class="app-form-button" button type="submit">INVIA</button>
+											<button class="app-form-button" type="submit" id="submit">INVIA</button>
 										</div>
 									</div>
 								</div>
@@ -100,4 +99,5 @@
 			<p>&copy; Università degli Studi di Napoli Federico II</p>
 		</footer>
 	</body>
+	<script src="ticket.js"defear></script>
 </html>
