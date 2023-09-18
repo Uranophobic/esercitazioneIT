@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="studente.css">
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="menu.css">
+		<link rel="stylesheet" href="ticket.css">
 		<script src="menu.js"defear></script>
 	</head>
 	<body>
@@ -62,14 +63,17 @@
 									<div class="app-form">
 										<div class="app-form-group">
 											<input class="app-form-control" placeholder="MATRICOLA"
-												value="">
+												value="<%=matricola%>">
 										</div>
 										<div class="app-form-group">
-											<input class="app-form-control" placeholder="NAME" value="">
+											<input class="app-form-control" placeholder="NOME" value="<%=cognome_alunno%>">
+										</div>
+										<div class="app-form-group message">
+											<input class="app-form-control" placeholder="TITOLO">
 										</div>
 		
 										<div class="app-form-group message">
-											<input class="app-form-control" placeholder="MESSAGE">
+											<input class="app-form-control" placeholder="MESSAGGIO">
 										</div>
 										<div class="app-form-group buttons">
 		
@@ -86,14 +90,14 @@
 		<% }%>
 	
 		<%-- 
-		<% if(idticket!=null){ %>
+		<% if(idticket!=null && chiuso==true){ %>
 		<form action="Mostraticket" method="post">
 			<button type="submit" value="Stampa">Mostra ticket aperti</button>
 		</form>
 		<% }%> 
 		 --%>
 		<footer>
-			<p>&copy; Università  degli Studi di Napoli Federico II</p>
+			<p>&copy; Universitï¿½ degli Studi di Napoli Federico II</p>
 		</footer>
 	</body>
 </html>

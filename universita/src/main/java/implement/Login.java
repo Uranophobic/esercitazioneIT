@@ -57,6 +57,7 @@ public class Login {
 		}
 		return rsr;
 	}
+	
 	public ResultSet segre(String username, String password) {
 		ResultSet rsr = null;
 

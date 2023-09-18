@@ -69,7 +69,7 @@ public class TicketControl extends HttpServlet {
 		}
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("segreteria.jsp"); // con resultset abbiamo preso la
+		RequestDispatcher rd = request.getRequestDispatcher("ticket.jsp"); // con resultset abbiamo preso la
 																				// tabella dei corsi disponibili
 		
 		rd.forward(request, response);

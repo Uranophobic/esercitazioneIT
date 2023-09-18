@@ -30,13 +30,53 @@
 				    <a href="javascript:void(0)" class="Xbtn" onclick="closeMenu()">&times;</a>
 		           	<div class="ContenutoMenu">
 		               <a href="#">Home</a>
-		               <a href="ticket.jsp">Ticket</a>
+		               
 		               <a href="logout.jsp"> logout</a>
 		           	</div>
 		           	<div id="blocco" class="blocco"></div>
 		       </div>
 			</header>
 			<h1 style="text-align:center">Bentornato <%=nome%> <%=cognome%> !</h1>
+			<form action="StampaTicket" method="post"> <!-- apertura per visualizzare i ticket presenti -->
+			 <% if(appelli!=null){ %>
+					<p class="pclass"> Sono presenti i seguenti ticket <%=materia %></p>
+					<table>
+					    <tr>
+					        <th></th>
+					        <th>ID Appello</th>
+					        <th>Data</th>
+					    </tr>
+					    
+					    <% while(appelli.next()){ %>
+							<tr>
+								<td><input type="radio" name="ID_appello" value=<%=appelli.getInt(1)%>></td>
+								<td><%=appelli.getInt(1)%></td>
+								<td><%=appelli.getDate("Data") %></td>
+							</tr>
+							</table>
+							<button type="submit" value="Stampa" class="bottoneP">Vai</button>
+						<% }%>  
+				<% }%>
+			</form>
+			<% if(elenco!=null){%>
+				<div class="div_table">
+				<p>Per l'esame <b><%=nomeMateria %></b> in data <b><%=Data %></b> si sono prenotati i seguenti studenti: </p>
+					<table>
+					    <tr>
+					        <th>Nome</th>
+					        <th>Cognome</th>
+					        <th>Matricola</th>
+					    </tr>
+					    <% while(elenco.next()){ %>
+							<tr>
+							    <td><%=elenco.getString("nome")%></td>
+								<td><%=elenco.getString("cognome")%></td>
+								<td><%=elenco.getString("Matricola") %></td>
+							</tr>
+						<% }%>
+					</table>
+				</div>
+			<%} %>
 	        
 	    </section>
 	    <footer>
