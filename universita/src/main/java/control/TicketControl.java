@@ -30,14 +30,9 @@ public class TicketControl extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		matricola1 =  request.getParameter("matricola");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session;
+		matricola1 =  request.getParameter("matricola");
+		
 		try {
 			ResultSet rs = studente.ricerca(matricola1);
 			rs.next();
@@ -47,6 +42,7 @@ public class TicketControl extends HttpServlet {
 			String richiesta = "";
 			String idtickect = "";
 			rs = ticket.lista();
+			System.out.println();
 			while(rs.next()) {
 				
 				if (rs.getString("idstud").equals(matricola)) {
@@ -63,16 +59,25 @@ public class TicketControl extends HttpServlet {
 			session.setAttribute("cognome", cognome);
 			session.setAttribute("richiesta", richiesta);
 			session.setAttribute("idticket", idtickect);
+			RequestDispatcher rd = request.getRequestDispatcher("ticket.jsp"); 
+			rd.forward(request, response);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("segreteria.jsp"); // con resultset abbiamo preso la
+		
+		
+		// con resultset abbiamo preso la
 																				// tabella dei corsi disponibili
 		
-		rd.forward(request, response);
+		
 	}
 
 }
