@@ -82,7 +82,7 @@ public class TicketControl extends HttpServlet {
 		int matricolaint = Integer.parseInt(matricola);
 
 		ticket.inserire(matricolaint, titolo, messaggio);
-		session.setAttribute("tabella_corso", lo.tabella());
+		request.setAttribute("tabella_corso", lo.tabella());
 
 		RequestDispatcher rd = request.getRequestDispatcher("studente.jsp");
 		rd.forward(request, response);
