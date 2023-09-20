@@ -24,6 +24,7 @@
 		String messaggio = (String) request.getAttribute("successo");
 		String data = (String) request.getAttribute("data");
 		String materia2 = (String) request.getAttribute("materia2");
+		boolean esito = (boolean)request.getAttribute("esito");
 		%>
 		<%if (matricola == null) {response.sendRedirect("index.jsp");}%>
 		
@@ -90,10 +91,12 @@
 			</form>
 		<%}%>
 		
-		<%if (messaggio != null){%>
-	        <p><%=messaggio%></p>
+		<!-- prenotazione NON ok -->
+		<%if (esito){%>
+	        <p> Sei già iscritto a questo esame </p>
 		<%} else {%><%} %>
 		
+		<!-- prenotazione ok -->
 		<% if (materia2 != null && data != null) {%>
 	        <p id="messaggio_prenotazione" style="text-align:center;">Prenotazione effettuata con successo in data <b><%=data%></b> per il corso <b><%=materia2%></b></p>
 	   		<a href="javascript: window.history.go(-2)">

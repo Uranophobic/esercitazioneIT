@@ -42,7 +42,7 @@ public class Prenota extends HttpServlet {
 		HttpSession session = request.getSession();
 		String appello = request.getParameter("appello");
 		String matricola = (String) session.getAttribute("matricola");
-
+		boolean esiste= false;
 		try {
 
 			
@@ -50,7 +50,14 @@ public class Prenota extends HttpServlet {
 			int idmatri = Integer.parseInt(matricola);
 			int idappel = Integer.parseInt(appello);
 			
+			ResultSet prova = query.getResult("SELECT * FROM prenotazione WHERE matricola_stud='" + matricola + "' AND id_app='" + appello + "'" );
+			if(prova!=null) {
+				esiste = true;
+				
+			} 
+			System.out.println("ESITO DELLA QUERY: "+ esiste);
 			System.out.println("I'm here");
+			
 			prenotazione.inserire( idappel, idmatri);
 
 			ResultSet data = appello1.ricerca(idappel);
@@ -65,6 +72,7 @@ public class Prenota extends HttpServlet {
 			RequestDispatcher rd1 = request.getRequestDispatcher("studente.jsp");
 			request.setAttribute("data", dataScelta);
 			request.setAttribute("materia2", nomeMateria);
+			request.setAttribute("esito", esiste);
 			rd1.forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
