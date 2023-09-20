@@ -20,6 +20,7 @@
   .container {
     flex: 0 1 700px;
     margin: auto;
+    margin-top: 5%!important;
     padding: 10px;
   }
   
@@ -106,7 +107,6 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    color: #ea1d6f;
     font-size: 26px;
   }
   
@@ -147,7 +147,7 @@
     background: none;
     border: none;
     border-bottom: 1px solid #666;
-    color: #ddd;
+    color:#666;
     font-size: 14px;
     text-transform: uppercase;
     outline: none;
