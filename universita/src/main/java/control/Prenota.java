@@ -42,7 +42,7 @@ public class Prenota extends HttpServlet {
 		HttpSession session = request.getSession();
 		String appello = request.getParameter("appello");
 		String matricola = (String) session.getAttribute("matricola");
-		boolean esiste= false;
+		Boolean esiste= false;
 		try {
 
 			

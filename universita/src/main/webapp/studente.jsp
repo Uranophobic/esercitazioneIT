@@ -24,7 +24,7 @@
 		String messaggio = (String) request.getAttribute("successo");
 		String data = (String) request.getAttribute("data");
 		String materia2 = (String) request.getAttribute("materia2");
-		boolean esito = (boolean)request.getAttribute("esito");
+		Boolean esito = (Boolean)request.getAttribute("esito");
 		%>
 		<%if (matricola == null) {response.sendRedirect("index.jsp");}%>
 		
@@ -92,7 +92,7 @@
 		<%}%>
 		
 		<!-- prenotazione NON ok -->
-		<%if (esito){%>
+		<%if (esito!=null){%>
 	        <p> Sei già iscritto a questo esame </p>
 		<%} else {%><%} %>
 		
